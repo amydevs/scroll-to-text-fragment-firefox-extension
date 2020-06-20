@@ -5,7 +5,8 @@
                 let newUrl = tabInfo.url
                 let command = ":~:text="
                 if (newUrl.includes(command)){
-                    var parsedVariables = decodeURI(newUrl.slice(newUrl.indexOf(command) + command.length));
+                    var parsedVariables = decodeURI(decodeURI(decodeURI(decodeURI(decodeURI(decodeURI(newUrl.slice(newUrl.indexOf(command) + command.length)))))))
+                    console.log(parsedVariables)
                     browser.find.find(parsedVariables, {tabId: tabID}).then(found)
                 }
             }
