@@ -1,0 +1,13 @@
+{
+    "manifest_version": 2,
+    "name": "Scroll to Link",
+    "version": "1.0",
+
+    "permissions": ["activeTab", "contextMenus", "clipboardWrite", "tabs", "find"],
+
+    "description": "Port of Chrome's new feature.",
+
+    "background": {
+        "scripts": ["background.js"]
+    }
+}
