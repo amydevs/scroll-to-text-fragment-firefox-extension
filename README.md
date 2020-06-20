@@ -6,6 +6,6 @@ References for helping build this thing:<br>
 - https://wicg.github.io/scroll-to-text-fragment/
 - https://github.com/WICG/scroll-to-text-fragment
 <br>
-Development Instructions:
+Development Instructions:<br>
 1. run `npm install -g web-ext`
 2. run `web-ext run`
