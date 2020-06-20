@@ -11,9 +11,8 @@
             }
 
         function found(results) {
-            console.log(`There were: ${results.count} matches.`);
             if (results.count > 0) {
-              browser.find.highlightResults();
+              browser.find.highlightResults({noScroll: false});
             }
         }
 
