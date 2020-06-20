@@ -1,28 +1,23 @@
-(async (browser) => {
-
-    async function findInAllTabs(allTabs) {
-        for (let tab of allTabs) {
-          let results = await browser.find.find("banana", {tabId: tab.id});
-          console.log(`In page "${tab.url}": ${results.count} matches.`)
-        }
-      }
-      console.log(browser.tabs.query({}))
-      browser.tabs.query({}).then(findInAllTabs);
-
     browser.tabs.onUpdated.addListener(handleUpdated);
 
-    
+    function handleUpdated(tabID, changeInfo, tabInfo) {
 
-    function handleUpdated(tabId, changeInfo, tabInfo) {
-        let newUrl = changeInfo.url
+            if(tabInfo.status == "loading") {
+                let newUrl = changeInfo.url
+                if (newUrl !== undefined){                    
+                    let command = ":~:text="
+                    if (newUrl.includes(command)){
+                        var parsedVariables = decodeURI(newUrl.slice(newUrl.indexOf(command) + command.length));
+                        setTimeout(function(){ browser.find.find(parsedVariables, {tabId: tabID}).then(found) }, 1000);
+                    }
+                }
+            }
 
-        if (newUrl !== undefined){
-            let command = "#:~:"
-            if (newUrl.includes(command)){
-                var parsedVariables = decodeURI(newUrl.slice(newUrl.indexOf(command) + command.length));
+        function found(results) {
+            console.log(`There were: ${results.count} matches.`);
+            if (results.count > 0) {
+              browser.find.highlightResults();
             }
         }
 
     }
-    
-})(window.chrome || window.browser);
